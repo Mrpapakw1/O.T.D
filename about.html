@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTD - About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            z-index: 1000;
+            background: #e8e8e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.8s ease;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4a574;
+        }
+
+        .nav-links a.active {
+            color: #d4a574;
+            font-weight: 700;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: #000;
+            transition: all 0.3s;
+        }
+
+        /* About Hero Section */
+        .about-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 50px 50px;
+            background: #000;
+        }
+
+        .hero-images {
+            display: none;
+        }
+
+        .hero-image-item {
+            background: #0f0f0f;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .hero-image-item:first-child {
+            grid-column: 1 / -1;
+            aspect-ratio: 16/9;
+        }
+
+        .hero-image-item:not(:first-child) {
+            aspect-ratio: 1;
+        }
+
+        .hero-image-item img,
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+            text-align: center;
+            max-width: 1000px;
+        }
+
+        .hero-content h1 {
+            font-size: 80px;
+            font-weight: 700;
+            letter-spacing: 12px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: #d4a574;
+        }
+
+        .hero-content p {
+            font-size: 22px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            color: #e8e8e8;
+            font-weight: 300;
+        }
+
+        .hero-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 120px 50px;
+            background: #0a0a0a;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 56px;
+            letter-spacing: 8px;
+            margin-bottom: 100px;
+            text-transform: uppercase;
+            animation: fadeInUp 1s ease;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: #000;
+            padding: 60px 40px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #1a1a1a;
+            transition: all 0.4s ease;
+            animation: scaleIn 0.6s ease;
+        }
+
+        .value-card:nth-child(1) { animation-delay: 0.2s; }
+        .value-card:nth-child(2) { animation-delay: 0.4s; }
+        .value-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .value-card:hover {
+            transform: translateY(-15px);
+            border-color: #d4a574;
+            box-shadow: 0 20px 60px rgba(212,165,116,0.3);
+        }
+
+        .value-icon {
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        .value-card h3 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            color: #d4a574;
+            text-transform: uppercase;
+        }
+
+        .value-card p {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 120px 50px;
+            background: #000;
+        }
+
+        .story-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .story-text {
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .story-text h2 {
+            font-size: 48px;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #d4a574;
+        }
+
+        .story-text p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+
+        .story-image {
+            display: none;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .team-image {
+            display: none;
+        }
+        .team-section {
+            padding: 120px 50px;
+            background: #0a0a0a;
+        }
+
+        .team-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-image {
+            aspect-ratio: 1;
+            background: #0f0f0f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .team-info {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .team-info h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .team-info p {
+            color: #d4a574;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 50px;
+            background: linear-gradient(135deg, #d4a574, #000);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .cta-content h2 {
+            font-size: 56px;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .cta-content p {
+            font-size: 20px;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            padding: 20px 50px;
+            background: #fff;
+            border: 2px solid #fff;
+            color: #000;
+            font-size: 16px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 50px 40px;
+            background: #000;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto 60px;
+        }
+
+        .footer-section h3 {
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #888;
+            text-decoration: none;
+            display: block;
+            margin: 12px 0;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #d4a574;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #555;
+            font-size: 12px;
+            letter-spacing: 1px;
+            padding-top: 40px;
+            border-top: 1px solid #222;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-hero,
+            .story-content {
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 56px;
+            }
+
+            .hero-content h1::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .values-grid,
+            .team-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 30px;
+            }
+
+            .nav-links {
+                gap: 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .cta-content h2 {
+                font-size: 36px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-images {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <svg class="logo" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                <text x="10" y="70" font-family="Arial" font-size="60" font-weight="bold" fill="#000">O</text>
+                <text x="70" y="70" font-family="Arial" font-size="60" font-weight="bold" fill="#000">T</text>
+                <text x="120" y="70" font-family="Arial" font-size="60" font-weight="bold" fill="#d4a574">D</text>
+            </svg>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="hero-images">
+            <div class="hero-image-item">
+            </div>
+            <div class="hero-image-item">
+            </div>
+            <div class="hero-image-item">
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <h1>WHO WE ARE</h1>
+            <p>OTD is a streetwear - inspired custom merch brand that specialises in creating clean, minimal and bold designs for individuals,creators and businesses.</p>
+            <p>Our mission is simple : to create merch that feel premium, looks intentional , and tells a story.</p>
+            <p>Designed for brands that want to be seen. We would bring your imagination to life.</p>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <h2 class="section-title">OUR VALUES</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🎨</div>
+                <h3>Creativity</h3>
+                <p>We push boundaries and think outside the box to deliver designs that are unique, memorable, and truly represent your brand's identity.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⭐</div>
+                <h3>Quality</h3>
+                <p>Premium materials, exceptional craftsmanship, and attention to detail in every piece we create. Quality is never negotiable.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3>Partnership</h3>
+                <p>We collaborate closely with our clients, treating your vision as our own and working together to bring it to life perfectly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="story-content">
+            <div class="story-text">
+                <h2>OUR STORY</h2>
+                <p>OTD was born from a simple observation: brands were settling for generic, forgettable merchandise that failed to capture their essence or resonate with their audience.</p>
+                <p>We saw an opportunity to change that narrative. By combining streetwear aesthetics with custom design excellence, we created a new standard for brand merchandise.</p>
+                <p>What started as a passion project has evolved into a full-fledged brand that's helping businesses, creators, and individuals stand out in a crowded marketplace.</p>
+                <p>Today, we're proud to be the go-to choice for brands that refuse to be ordinary and demand merchandise that makes a statement.</p>
+            </div>
+            <div class="story-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>READY TO WORK TOGETHER?</h2>
+            <p>Let's create something extraordinary. Get in touch with us today and let's bring your vision to life with custom merchandise that truly represents your brand.</p>
+            <a href="contact.html" class="cta-button">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About OTD</h3>
+                <p>Custom streetwear brand<br>specializing in unique<br>merchandise design</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="catalogue.html">Catalogue</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <a href="mailto:tofunmiogundeji105@gmail.com">Mailus@gmail.com</a>
+                <p>07042181308</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <a href="https://www.tiktok.com/@otd_merchline?_r=1&_t=ZS-92LnamTIF0O">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+                <a href="https://www.tiktok.com/@otd_merchline?_r=1&_t=ZS-92LnamTIF0O">TikTok</a>
+            </div>
+        </div>
+        <div class="copyright">© 2024 OTD. ALL RIGHTS RESERVED.</div>
+    </footer>
+</body>
+</html>
