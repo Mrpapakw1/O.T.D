@@ -46,12 +46,12 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 30px;
         }
 
         .nav-links {
             display: flex;
-            gap: 50px;
+            gap: 40px;
             list-style: none;
         }
 
@@ -75,7 +75,7 @@
         .hamburger {
             width: 30px;
             height: 20px;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
@@ -88,71 +88,97 @@
             transition: all 0.3s;
         }
 
-        /* Hero Section */
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background: #e8e8e8;
+            padding: 80px 30px 30px;
+            transition: right 0.4s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu ul li {
+            margin-bottom: 30px;
+        }
+
+        .mobile-menu ul li a {
+            color: #000;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu ul li a:hover,
+        .mobile-menu ul li a.active {
+            color: #d4a574;
+        }
+
+        /* Catalogue Hero */
         .catalogue-hero {
-            min-height: 60vh;
+            min-height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 120px 50px 50px;
+            background: #000;
             text-align: center;
-            padding: 150px 50px 80px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
         }
 
-        .hero-content {
-            max-width: 900px;
+        .catalogue-hero h1 {
+            font-size: 80px;
+            font-weight: 700;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
             animation: fadeInUp 1s ease;
         }
 
-        .hero-content h1 {
-            font-size: 72px;
-            font-weight: 700;
-            letter-spacing: 12px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
-        .hero-content p {
+        .catalogue-hero p {
             font-size: 22px;
             color: #ccc;
-            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
-        /* Products Grid */
-        .products-section {
-            padding: 80px 50px 120px;
+        /* Catalogue Section */
+        .catalogue-section {
+            padding: 80px 50px;
             background: #000;
         }
 
-        .products-grid {
+        .catalogue-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .product-card {
-            position: relative;
-            background: #0f0f0f;
+        .catalogue-item {
+            background: #0a0a0a;
             border-radius: 15px;
             overflow: hidden;
-            cursor: pointer;
             transition: transform 0.4s ease;
             animation: fadeInUp 0.6s ease;
         }
 
-        .product-card:nth-child(1) { animation-delay: 0.1s; }
-        .product-card:nth-child(2) { animation-delay: 0.2s; }
-        .product-card:nth-child(3) { animation-delay: 0.3s; }
-        .product-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .product-card:hover {
+        .catalogue-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(212,165,116,0.3);
         }
 
-        .product-image {
+        .catalogue-image {
             aspect-ratio: 1;
             background: #1a1a1a;
             display: flex;
@@ -163,104 +189,77 @@
             overflow: hidden;
         }
 
-        .product-image img {
+        .catalogue-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212,165,116,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .catalogue-item:hover .catalogue-image::before {
+            opacity: 1;
+        }
+
+        .catalogue-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             transition: transform 0.4s ease;
         }
 
-        .product-card:hover .product-image img {
-            transform: scale(1.1);
+        .catalogue-item:hover .catalogue-image img {
+            transform: scale(1.05);
         }
 
-        .product-image::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(212,165,116,0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .product-card:hover .product-image::before {
-            opacity: 1;
-        }
-
-        .product-info {
-            padding: 30px;
-            background: #0f0f0f;
-        }
-
-        .product-category {
-            font-size: 12px;
-            color: #d4a574;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .product-price {
-            font-size: 24px;
-            color: #d4a574;
-            font-weight: 700;
+        .catalogue-info {
+            padding: 25px;
             text-align: center;
         }
 
-        .view-btn {
-            padding: 10px 25px;
-            background: transparent;
-            border: 2px solid #333;
-            color: #fff;
-            font-size: 12px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 20px;
+        .catalogue-info h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            color: #d4a574;
         }
 
-        .view-btn:hover {
-            background: #d4a574;
-            border-color: #d4a574;
-            color: #000;
+        .catalogue-info p {
+            color: #888;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 120px 50px;
+            padding: 100px 50px;
             background: linear-gradient(135deg, #d4a574, #000);
             text-align: center;
         }
 
         .cta-content {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            animation: fadeInUp 1s ease;
         }
 
         .cta-content h2 {
-            font-size: 56px;
+            font-size: 48px;
             letter-spacing: 5px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-transform: uppercase;
         }
 
         .cta-content p {
-            font-size: 20px;
-            margin-bottom: 50px;
+            font-size: 18px;
+            margin-bottom: 40px;
             line-height: 1.6;
         }
 
         .cta-button {
-            padding: 20px 50px;
+            padding: 18px 45px;
             background: #fff;
             border: 2px solid #fff;
             color: #000;
@@ -351,12 +350,14 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .products-grid {
-                grid-template-columns: 1fr;
+            .catalogue-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
             }
 
-            .hero-content h1 {
-                font-size: 48px;
+            .catalogue-hero h1 {
+                font-size: 56px;
+                letter-spacing: 8px;
             }
         }
 
@@ -366,25 +367,140 @@
             }
 
             .nav-links {
-                gap: 30px;
+                display: none;
             }
 
-            .hero-content h1 {
-                font-size: 36px;
-                letter-spacing: 6px;
+            .hamburger {
+                display: flex;
             }
 
-            .products-grid {
+            .catalogue-hero {
+                padding: 100px 30px 40px;
+                min-height: 40vh;
+            }
+
+            .catalogue-hero h1 {
+                font-size: 42px;
+                letter-spacing: 5px;
+            }
+
+            .catalogue-hero p {
+                font-size: 18px;
+            }
+
+            .catalogue-section {
+                padding: 60px 30px;
+            }
+
+            .catalogue-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 25px;
+            }
+
+            .catalogue-image {
+                padding: 25px;
+            }
+
+            .catalogue-info {
+                padding: 20px;
+            }
+
+            .catalogue-info h3 {
+                font-size: 22px;
+            }
+
+            .catalogue-info p {
+                font-size: 15px;
+            }
+
+            .cta-section {
+                padding: 80px 30px;
             }
 
             .cta-content h2 {
                 font-size: 36px;
+                letter-spacing: 3px;
+            }
+
+            .cta-content p {
+                font-size: 16px;
             }
 
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                width: 80px;
+            }
+
+            .catalogue-hero {
+                padding: 90px 20px 30px;
+            }
+
+            .catalogue-hero h1 {
+                font-size: 32px;
+                letter-spacing: 3px;
+            }
+
+            .catalogue-hero p {
+                font-size: 16px;
+            }
+
+            .catalogue-section {
+                padding: 50px 20px;
+            }
+
+            .catalogue-grid {
+                gap: 20px;
+            }
+
+            .catalogue-image {
+                padding: 20px;
+            }
+
+            .catalogue-info {
+                padding: 18px;
+            }
+
+            .catalogue-info h3 {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .catalogue-info p {
+                font-size: 14px;
+            }
+
+            .cta-section {
+                padding: 60px 20px;
+            }
+
+            .cta-content h2 {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+
+            .cta-content p {
+                font-size: 15px;
+                margin-bottom: 35px;
+            }
+
+            .cta-button {
+                padding: 15px 35px;
+                font-size: 14px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
         }
     </style>
@@ -405,7 +521,7 @@
                 <li><a href="catalogue.html" class="active">Catalogue</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -413,139 +529,124 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="catalogue.html" class="active">Catalogue</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Catalogue Hero -->
     <section class="catalogue-hero">
-        <div class="hero-content">
-            <h1>CATALOGUE</h1>
-            <p>Explore our collection of premium custom merchandise. From streetwear essentials to bold statement pieces, every item is designed to make your brand unforgettable.</p>
+        <div>
+            <h1>OUR CATALOGUE</h1>
+            <p>Explore our collection of premium custom caps</p>
         </div>
     </section>
 
-    <!-- Products Grid -->
-    <section class="products-section">
-        <div class="products-grid">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="3_20251203_162542_0002.png" alt="Custom Embroidered Cap">
+    <!-- Catalogue Section - Caps -->
+    <section class="catalogue-section">
+        <div class="catalogue-grid">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="3_20251203_162542_0002.png" alt="Cap 1">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Caps</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-
-            <!-- Product 2 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="4_20251203_162542_0003.png" alt="Graphic T-Shirt">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="4_20251203_162542_0003.png" alt="Cap 2">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">CAPS</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-
-            <!-- Product 3 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="6_20251203_162542_0005.png" alt="Premium Bomber Jacket">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="6_20251203_162542_0005.png" alt="Cap 3">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">CAPS</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-
-            <!-- Product 4 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="24_20251216_164030_0000.png" alt="Custom Designer Bag">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="24_20251216_164030_0000.png" alt="Cap 4">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">CAPS</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-             <!-- Product 6 -->
-              <div class="product-card">
-                <div class="product-image">
-                    <img src="26_20251216_164030_0002.png" alt="Custom Embroidered Cap">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="25_20251216_164030_0001.png" alt="Cap 5">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Caps</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-             <!-- Product 7 -->
-              <div class="product-card">
-                <div class="product-image">
-                    <img src="29_20251216_164030_0005.png" alt="Custom Embroidered Cap">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="26_20251216_164030_0002.png" alt="Cap 6">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Caps</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-             <!-- Product 8 -->
-              <div class="product-card">
-                <div class="product-image">
-                    <img src="32_20251216_164030_0008.png" alt="Custom Embroidered Cap">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="29_20251216_164030_0005.png" alt="Cap 7">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Caps</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-             <!-- Product 9 -->
-              <div class="product-card">
-                <div class="product-image">
-                    <img src="black shii.jpg" alt="Custom Embroidered Cap">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="32_20251216_164030_0008.png" alt="Cap 8">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Caps</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-             <!-- Product 10 -->
-              <div class="product-card">
-                <div class="product-image">
-                    <img src="White And Black Minimalist Cap Baseball Mockup Instagram Post_20251216_170220_0000.png" alt="Custom Embroidered Cap">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="IMG-20251219-WA0062.jpg" alt="Cap 9">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Caps</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
-             <!-- Product 11 -->
-              <div class="product-card">
-                <div class="product-image">
-                    <img src="IMG-20251219-WA0062.jpg" alt="Custom Embroidered Cap">
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="White And Black Minimalist Cap Baseball Mockup Instagram Post_20251216_170220_0000.png" alt="Cap 10">
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Caps</div>
-                    <div class="product-footer">
-                        <span class="product-price">TBA</span>
-                       
-                    </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
+                </div>
+            </div>
+            <div class="catalogue-item">
+                <div class="catalogue-image">
+                    <img src="black shii.jpg" alt="Cap 11">
+                </div>
+                <div class="catalogue-info">
+                    <h3>CAP</h3>
+                    <p>Price: TBA</p>
                 </div>
             </div>
         </div>
@@ -554,9 +655,9 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-content">
-            <h2>CUSTOM ORDERS</h2>
-            <p>Don't see what you're looking for? We create custom merchandise tailored to your brand's unique vision. Let's bring your ideas to life.</p>
-            <a href="https://wa.me/2347042181308" class="cta-button">Request Custom Order</a>
+            <h2>READY TO ORDER?</h2>
+            <p>Let's create custom merchandise that perfectly represents your brand. Get in touch with us today.</p>
+            <a href="contact.html" class="cta-button">Contact Us</a>
         </div>
     </section>
 
@@ -576,7 +677,7 @@
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
-                <a href="mailto:tofunmiogundeji105@gmail.com">Mailus.com</a>
+                <a href="mailto:tofunmiogundeji105@gmail.com">tofunmiogundeji105@gmail.com</a>
                 <p>07042181308</p>
             </div>
             <div class="footer-section">
@@ -587,7 +688,24 @@
                 <a href="https://www.tiktok.com/@otd_merchline?_r=1&_t=ZS-92LnamTIF0O">TikTok</a>
             </div>
         </div>
-        <div class="copyright">© 2025 O.T.D. ALL RIGHTS RESERVED.</div>
+        <div class="copyright">© 2025 OTD. ALL RIGHTS RESERVED.</div>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (menu && hamburger && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
