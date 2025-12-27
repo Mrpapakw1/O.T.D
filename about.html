@@ -46,12 +46,12 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 30px;
         }
 
         .nav-links {
             display: flex;
-            gap: 50px;
+            gap: 40px;
             list-style: none;
         }
 
@@ -75,7 +75,7 @@
         .hamburger {
             width: 30px;
             height: 20px;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
@@ -88,6 +88,44 @@
             transition: all 0.3s;
         }
 
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background: #e8e8e8;
+            padding: 80px 30px 30px;
+            transition: right 0.4s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu ul li {
+            margin-bottom: 30px;
+        }
+
+        .mobile-menu ul li a {
+            color: #000;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu ul li a:hover,
+        .mobile-menu ul li a.active {
+            color: #d4a574;
+        }
+
         /* About Hero Section */
         .about-hero {
             min-height: 100vh;
@@ -96,37 +134,6 @@
             justify-content: center;
             padding: 120px 50px 50px;
             background: #000;
-        }
-
-        .hero-images {
-            display: none;
-        }
-
-        .hero-image-item {
-            background: #0f0f0f;
-            border-radius: 15px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-        }
-
-        .hero-image-item:first-child {
-            grid-column: 1 / -1;
-            aspect-ratio: 16/9;
-        }
-
-        .hero-image-item:not(:first-child) {
-            aspect-ratio: 1;
-        }
-
-        .hero-image-item img,
-        .story-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: none;
         }
 
         .hero-content {
@@ -261,69 +268,6 @@
             margin-bottom: 25px;
         }
 
-        .story-image {
-            display: none;
-        }
-
-        .story-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: none;
-        }
-
-        .team-image {
-            display: none;
-        }
-        .team-section {
-            padding: 120px 50px;
-            background: #0a0a0a;
-        }
-
-        .team-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .team-card {
-            background: #000;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.4s ease;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .team-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .team-image {
-            aspect-ratio: 1;
-            background: #0f0f0f;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .team-info {
-            padding: 40px;
-            text-align: center;
-        }
-
-        .team-info h3 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .team-info p {
-            color: #d4a574;
-            font-size: 18px;
-            letter-spacing: 1px;
-        }
-
         /* CTA Section */
         .cta-section {
             padding: 120px 50px;
@@ -429,28 +373,6 @@
             }
         }
 
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -475,23 +397,18 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .about-hero,
-            .story-content {
-                text-align: center;
-            }
-
             .hero-content h1 {
                 font-size: 56px;
+                letter-spacing: 8px;
             }
 
-            .hero-content h1::after {
-                left: 50%;
-                transform: translateX(-50%);
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .values-grid,
-            .team-container {
-                grid-template-columns: 1fr;
+            .section-title {
+                font-size: 48px;
+                letter-spacing: 6px;
             }
         }
 
@@ -501,31 +418,163 @@
             }
 
             .nav-links {
-                gap: 30px;
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .about-hero {
+                padding: 100px 30px 50px;
             }
 
             .hero-content h1 {
                 font-size: 42px;
+                letter-spacing: 5px;
+            }
+
+            .hero-content h1::after {
+                width: 100px;
             }
 
             .hero-content p {
                 font-size: 18px;
             }
 
+            .values-section,
+            .story-section,
+            .cta-section {
+                padding: 80px 30px;
+            }
+
             .section-title {
                 font-size: 36px;
+                letter-spacing: 4px;
+                margin-bottom: 60px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .value-card {
+                padding: 40px 30px;
+            }
+
+            .story-text h2 {
+                font-size: 36px;
+                letter-spacing: 3px;
+            }
+
+            .story-text p {
+                font-size: 16px;
             }
 
             .cta-content h2 {
                 font-size: 36px;
+                letter-spacing: 3px;
+            }
+
+            .cta-content p {
+                font-size: 18px;
             }
 
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px 20px;
             }
 
-            .hero-images {
-                display: none;
+            .logo {
+                width: 80px;
+            }
+
+            .about-hero {
+                padding: 90px 20px 40px;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+                letter-spacing: 3px;
+                margin-bottom: 30px;
+            }
+
+            .hero-content h1::after {
+                width: 80px;
+                height: 3px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+                margin-bottom: 25px;
+            }
+
+            .values-section,
+            .story-section,
+            .cta-section {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 28px;
+                letter-spacing: 3px;
+                margin-bottom: 50px;
+            }
+
+            .value-card {
+                padding: 35px 25px;
+            }
+
+            .value-icon {
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+
+            .value-card h3 {
+                font-size: 22px;
+                letter-spacing: 2px;
+            }
+
+            .value-card p {
+                font-size: 15px;
+            }
+
+            .story-text h2 {
+                font-size: 28px;
+                letter-spacing: 2px;
+                margin-bottom: 30px;
+            }
+
+            .story-text p {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            .cta-content h2 {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+
+            .cta-content p {
+                font-size: 16px;
+                margin-bottom: 40px;
+            }
+
+            .cta-button {
+                padding: 16px 40px;
+                font-size: 14px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
         }
     </style>
@@ -546,7 +595,7 @@
                 <li><a href="catalogue.html">Catalogue</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -554,21 +603,22 @@
         </nav>
     </header>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="catalogue.html">Catalogue</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
     <!-- About Hero Section -->
     <section class="about-hero">
-        <div class="hero-images">
-            <div class="hero-image-item">
-            </div>
-            <div class="hero-image-item">
-            </div>
-            <div class="hero-image-item">
-            </div>
-        </div>
-
         <div class="hero-content">
             <h1>WHO WE ARE</h1>
-            <p>OTD is a streetwear - inspired custom merch brand that specialises in creating clean, minimal and bold designs for individuals,creators and businesses.</p>
-            <p>Our mission is simple : to create merch that feel premium, looks intentional , and tells a story.</p>
+            <p>OTD is a streetwear - inspired custom merch brand that specialises in creating clean, minimal and bold designs for individuals, creators and businesses.</p>
+            <p>Our mission is simple: to create merch that feel premium, looks intentional, and tells a story.</p>
             <p>Designed for brands that want to be seen. We would bring your imagination to life.</p>
         </div>
     </section>
@@ -605,8 +655,6 @@
                 <p>What started as a passion project has evolved into a full-fledged brand that's helping businesses, creators, and individuals stand out in a crowded marketplace.</p>
                 <p>Today, we're proud to be the go-to choice for brands that refuse to be ordinary and demand merchandise that makes a statement.</p>
             </div>
-            <div class="story-image">
-            </div>
         </div>
     </section>
 
@@ -635,18 +683,35 @@
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
-                <a href="mailto:tofunmiogundeji105@gmail.com">Mailus@gmail.com</a>
+                <a href="mailto:tofunmiogundeji105@gmail.com">tofunmiogundeji105@gmail.com</a>
                 <p>07042181308</p>
             </div>
             <div class="footer-section">
                 <h3>Follow Us</h3>
-                <a href="https://www.tiktok.com/@otd_merchline?_r=1&_t=ZS-92LnamTIF0O">Instagram</a>
+                <a href="https://www.instagram.com/otd_merchline?igsh=MTgxcTY5bHQwMjBhcQ==">Instagram</a>
                 <a href="#">Twitter</a>
                 <a href="#">Facebook</a>
                 <a href="https://www.tiktok.com/@otd_merchline?_r=1&_t=ZS-92LnamTIF0O">TikTok</a>
             </div>
         </div>
-        <div class="copyright">© 2024 OTD. ALL RIGHTS RESERVED.</div>
+        <div class="copyright">© 2025 OTD. ALL RIGHTS RESERVED.</div>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
